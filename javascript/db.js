@@ -7,15 +7,15 @@ var config = {
     storageBucket: "solar-system-fcdd6.appspot.com",
     messagingSenderId: "973836801910"
 };
-    firebase.initializeApp(config);
+firebase.initializeApp(config);
 
 //   local reference to the firebase
 var database = firebase.database();
 
 
 // Function to grab the planets from db and display them on the page
-database.ref().on("child_added", function(cSnap) {
-      
+database.ref().on("child_added", function (cSnap) {
+
     // Log everything that's coming out of snapshot
     console.log(cSnap.val());
 
@@ -36,7 +36,8 @@ database.ref().on("child_added", function(cSnap) {
     var cImg = $("<img>").attr({
         class: "card-img-top",
         src: cSnap.val().photo,
-        alt: "Card image"
+        alt: cSnap.val().name,
+        id: "clickableImg"
     });
 
     // creating card body div
@@ -57,20 +58,17 @@ database.ref().on("child_added", function(cSnap) {
     // insert title/button into card body
     // cBody.append(cTitle, cButton);
     cBody.append(cTitle);
-    
+
     // insert image and card body into planet card
     pCard.append(cImg, cBody);
 
-    // Append the newly created table data to the table row
-    tRow.append(name, dest, freq, nextA, minA);
-
-    // Append the table row to the table body
-    tBody.append(tRow);
-    showTime();
-    
-
-
     // Handle the errors
-    }, function(errorObject) {
+}, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
-    });
+});
+
+// On click of a planet photo, go to new planet page
+$(document).on("click", "#clickableImg", function () {
+    var passName = $(this).attr("alt");
+    window.location.href = "planet.html?src="+passName;
+});
