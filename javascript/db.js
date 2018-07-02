@@ -17,7 +17,7 @@ var database = firebase.database();
 database.ref().on("child_added", function (cSnap) {
 
     // Log everything that's coming out of snapshot
-    console.log(cSnap.val());
+    // console.log(cSnap.val());
 
     // grabbing the planets row, where we will insert the planets from db
     var pRow = $("#planets");

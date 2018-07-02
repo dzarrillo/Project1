@@ -25,7 +25,7 @@
 
     <div class="wrapper">
 
-        <div class="displayarea">
+        <div class="displayArea">
 
             Planet picture and info display on this page
 
@@ -45,13 +45,39 @@
 
     <script>
 
+    // global var for image url returned by api query
+    var imgUrl;
+
     // Here is how to grab the name of the celestial object that was clicked on the main index page
-    console.log(window.location.search);
+    // console.log(window.location.search);
     var querystring = window.location.search;
     var celestialAr = querystring.split("=");
-    console.log(celestialAr[1]);
     $("#grabthis").html(celestialAr[1]);
+    var searchTerm = celestialAr[1];
+
     
+    // Here is a sample API pull to nasa images
+    function grabNASA() {
+
+    var queryURL = "https://images-api.nasa.gov/search?q=" + searchTerm ;
+
+    // Creates AJAX call for the search term passed to this html page
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+        }).then(function(response) {
+
+        var imgUrl = (response.collection.items[0].links[0].href);
+        var planetThumb = $('<img>').attr("src", imgUrl);
+        $(".displayArea").append(planetThumb);
+
+        });
+
+    };
+
+grabNASA();
+
+
     </script>
 
 </body>
