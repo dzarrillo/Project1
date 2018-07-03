@@ -3,6 +3,9 @@
 
 <head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Planet</title>
 
     <!-- Linking CSS -->
@@ -11,10 +14,14 @@
 
     <!-- Added link to the jQuery Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
     </script>
+
+    <script src="javascript/wiki.js"></script>
 
 </head>
 
@@ -24,19 +31,27 @@
     </div>
 
     <div class="wrapper">
-
         <div class="displayArea">
-
             Planet picture and info display on this page
-
         </div>
-
-
-
-
-
     </div>
 
+    <!-- <div class="row">
+        <div class="col">
+            <button id="btnInfo">Info</button>
+        </div>
+    </div> -->
+
+    <div class="row">
+        <div class="col-8">
+            <p id="article"></p>
+        </div> 
+        <div class="col-4" id="myyoutube" >
+            <p id="youtubeVideo"> Place videos here</p>
+            <iframe name="video_frame" id="video_frame" width="560" height="315" src="https://www.youtube.com/embed/m3ZUhpisWeQ" frameborder="0" allow="autoplay; encrypted-media"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
 
     <!-- Linking Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
