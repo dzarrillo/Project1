@@ -135,3 +135,8 @@ header ul li img {
      }
 
  }
+
+ #fixRatio {
+    width: 100%;
+    overflow: hidden
+ }
