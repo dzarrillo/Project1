@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
+
     <!-- Added link to the jQuery Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -16,6 +17,24 @@
     </script>
 
 </head>
+
+<header>
+        <div class="row">
+          <div class="columns large-4 small-10 header-left">
+            <a href="#" id="auth-lnk">Nasaap</a>
+            <p class="subtxt">Planetary Educational App</p>
+          </div>
+          <div class="columns large-8 small-2 header-left">
+            <img src="images/menu.svg" id="menu" (click)="toggle()">
+            <ul [ngClass]="{show: opened, animMenu: opened}">
+              <li id="exit"><img src="images/close.svg" (click)="toggle()"></li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Quiz</a></li>
+              <li><a href="#">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
 
 <body>
 
@@ -29,6 +48,24 @@
         </div>
 
     </div>
+    <div class="row pad feature">
+            <div class="columns small-12 large-1">
+              <img src="images/icon-twitter.png">
+            </div>
+            <div class="columns small-12 large-5">
+              <h3>Twitter Feed</h3>
+              <p>insert Twitter feed</p>
+            </div>
+            <div class="columns small-12 large-1 offset-1">
+              <img src="images/icon-ig.png">
+            </div>
+            <div class="columns small-12 large-5">
+              <h3>Instagram</h3>
+              <p>insert IG feed</p>
+            </div>
+          
+
+
 
     <!-- Linking Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
