@@ -4,7 +4,6 @@ $(document).ready(function () {
 
     var querystring = window.location.search;
     var celestialAr = querystring.split("=");
-    $("#grabthis").html(celestialAr[1]);
     var searchTerm = celestialAr[1];
     console.log("Search value: " + searchTerm);
     // var value = "earth"
