@@ -50,6 +50,12 @@ header ul li img {
     header {
         padding: 4rem 0;
     }
+     #auth-lnk{
+        float:right;
+    }
+    p.subtxt{
+        color:white;
+    }
 }
 
 @media only screen and (max-width: 64.063em) { 
