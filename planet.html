@@ -71,10 +71,11 @@
     var searchTerm = celestialAr[1];
 
     
-    // Here is a sample API pull to nasa images
+    // Here is a sample API pull to nasa imagesz
     function grabNASA() {
 
-    var queryURL = "https://images-api.nasa.gov/search?q=" + searchTerm ;
+    var queryURL = "https://images-api.nasa.gov/search?q=" + searchTerm + "&media_type=image";
+
 
     // Creates AJAX call for the search term passed to this html page
         $.ajax({
