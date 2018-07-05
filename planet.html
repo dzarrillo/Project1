@@ -100,7 +100,7 @@
 
 <body>
     <div id="grabthis">
-        Something
+        Replace this text
         <br>
     </div>
 
@@ -143,8 +143,9 @@
         // console.log(window.location.search);
         var querystring = window.location.search;
         var celestialAr = querystring.split("=");
-        $("#grabthis").html(celestialAr[1]);
         var searchTerm = celestialAr[1];
+
+        $("#grabthis").text("Here are some photos from NASA related to " + searchTerm);
 
 
         // Here is a sample API pull to nasa images
@@ -159,8 +160,11 @@
                 method: "GET"
             }).then(function (response) {
 
+                // Start grabbing images at a semi-random place
 
-                for (var i = 0; i < 9; i++) {
+                var randomStart = Math.floor( Math.random() * (90) );
+
+                for (var i = randomStart; i < (randomStart+8); i++) {
                     imgList[i] = (response.collection.items[i].links[0].href);
                     descList[i] = (response.collection.items[i].data[0].description);
                     // var planetThumb = $('<img>').attr("src", imgList[i]);
@@ -171,13 +175,13 @@
 
                     // Creating a column div
                     var phCol = $("<div>");
-                    phCol.attr("class", "col-md-4");
+                    phCol.attr("class", "col-md-3");
 
 
                     // creating the photo card and putting it in the column
                     var photoCard = $("<div>");
                     photoCard.attr("class", "card");
-                    photoCard.attr("id", "photocard");
+                    photoCard.attr("id", "photoCard");
                     phCol.append(photoCard);
                     dispA.append(phCol);
 
