@@ -70,5 +70,5 @@ database.ref().on("child_added", function (cSnap) {
 // On click of a planet photo, go to new planet page
 $(document).on("click", "#clickableImg", function () {
     var passName = $(this).attr("alt");
-    window.location.href = "planet.html?src="+passName;
+    location.href = "planet.html?src="+passName;
 });
