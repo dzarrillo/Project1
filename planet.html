@@ -14,8 +14,8 @@
 
     <!-- Added link to the jQuery Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    
+
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
@@ -27,12 +27,12 @@
 
 <body>
     <div id="grabthis">
-        Something <br>
+        Something
+        <br>
     </div>
 
     <div class="wrapper">
-        <div class="displayArea">
-            Planet picture and info display on this page
+        <div class="row" id="displayArea">
         </div>
     </div>
 
@@ -45,11 +45,11 @@
     <div class="row">
         <div class="col-8">
             <p id="article"></p>
-        </div> 
-        <div class="col-4" id="myyoutube" >
+        </div>
+        <div class="col-4" id="myyoutube">
             <p id="youtubeVideo"> Place videos here</p>
-            <iframe name="video_frame" id="video_frame" width="560" height="315" src="https://www.youtube.com/embed/m3ZUhpisWeQ" frameborder="0" allow="autoplay; encrypted-media"
-                    allowfullscreen></iframe>
+            <iframe name="video_frame" id="video_frame" width="560" height="315" src="https://www.youtube.com/embed/m3ZUhpisWeQ" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -60,38 +60,83 @@
 
     <script>
 
-    // global var for image url returned by api query
-    var imgUrl;
+        // global var for image url returned by api query
+        var imgUrl;
+        // global array variables for img urls and related desc
+        var imgList = [];
+        var descList = [];
 
-    // Here is how to grab the name of the celestial object that was clicked on the main index page
-    // console.log(window.location.search);
-    var querystring = window.location.search;
-    var celestialAr = querystring.split("=");
-    $("#grabthis").html(celestialAr[1]);
-    var searchTerm = celestialAr[1];
-
-    
-    // Here is a sample API pull to nasa imagesz
-    function grabNASA() {
-
-    var queryURL = "https://images-api.nasa.gov/search?q=" + searchTerm + "&media_type=image";
+        // Here is how to grab the name of the celestial object that was clicked on the main index page
+        // console.log(window.location.search);
+        var querystring = window.location.search;
+        var celestialAr = querystring.split("=");
+        $("#grabthis").html(celestialAr[1]);
+        var searchTerm = celestialAr[1];
 
 
-    // Creates AJAX call for the search term passed to this html page
-        $.ajax({
-        url: queryURL,
-        method: "GET"
-        }).then(function(response) {
+        // Here is a sample API pull to nasa images
+        function grabNASA() {
 
-        var imgUrl = (response.collection.items[0].links[0].href);
-        var planetThumb = $('<img>').attr("src", imgUrl);
-        $(".displayArea").append(planetThumb);
+            var queryURL = "https://images-api.nasa.gov/search?q=" + searchTerm + "&media_type=image";
 
-        });
 
-    };
+            // Creates AJAX call for the search term passed to this html page
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
 
-grabNASA();
+
+                for (var i = 0; i < 9; i++) {
+                    imgList[i] = (response.collection.items[i].links[0].href);
+                    descList[i] = (response.collection.items[i].data[0].description);
+                    // var planetThumb = $('<img>').attr("src", imgList[i]);
+                    // $(".displayArea").append(planetThumb);
+
+                    // grabbing the display area, where we will insert the photos from API 
+                    var dispA = $("#displayArea");
+
+                    // Creating a column div
+                    var phCol = $("<div>");
+                    phCol.attr("class", "col-md-4");
+
+
+                    // creating the photo card and putting it in the column
+                    var photoCard = $("<div>");
+                    photoCard.attr("class", "card");
+                    photoCard.attr("id", "photocard");
+                    phCol.append(photoCard);
+                    dispA.append(phCol);
+
+
+                    // creating image div
+                    var planetThumb = $('<img>').attr("src", imgList[i]);
+
+                    // creating card body div
+                    var pcBody = $("<div>");
+                    pcBody.attr("class", "card-body");
+
+                    // creating title for card body
+                    var pcTitle = $("<h5>");
+                    pcTitle.attr("class", "card-title");
+                    pcTitle.text(descList[i]);
+
+                    // insert title into card body
+
+                    pcBody.append(pcTitle);
+
+                    // insert image and card body into photo card
+                    photoCard.append(planetThumb, pcBody);
+
+
+
+                }
+
+            });
+
+        };
+
+        grabNASA();
 
 
     </script>
