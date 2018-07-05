@@ -1,0 +1,142 @@
+header a {
+    font-weight:bold;
+    text-transform: uppercase;
+    font-size:.8em;
+    color:#2d414e;
+}
+
+#auth-lnk {
+    color:#000;
+    font-size:2em;
+    font-weight:bold;
+}
+
+p.subtxt {
+    font-size:1.1em;
+}
+
+header ul {
+    list-style-type:none;
+    float:right;
+}
+
+header ul li {
+    display:inline;
+    margin: 0 2rem;
+}
+
+header ul li img {
+    width:10%;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+#menu {
+    display:none;
+    float:right;
+}
+
+.show {
+    display:block !important;
+}
+
+
+/* min-width 1025px, large screens */
+@media only screen and (min-width: 64.063em) { 
+    #exit {
+        display:none;
+    }
+
+    header {
+        padding: 4rem 0;
+    }
+}
+
+@media only screen and (max-width: 64.063em) { 
+
+    header ul {
+        display:none;
+        background:black;
+        position:absolute;
+        height:100%;
+        top:0;
+        right:0;
+        width:200px;
+        z-index:2;
+        padding-top:30px;
+    }
+
+    header ul li {
+        display:block;
+        margin: 0;
+    }
+
+    header ul li a {
+        display:block;
+        padding: 8px 0 8px 20px;
+    }
+
+    header ul li a:hover {
+        background-color:#2c3437;
+    }
+
+    #exit img {
+        margin-left: 20px;
+    }
+
+    #menu {
+        display:block;
+        float:none;
+        margin: 20px auto;
+        cursor: pointer;
+    }
+
+    .header-left {
+        padding-left: 1.5em;
+    }
+
+    .animMenu {
+        animation: slide-in 0.5s forwards;
+        -webkit-animation: slide-in 0.5s forwards;
+        transform: translateX(50%);
+        -webkit-transform: translateX(50%);
+    }
+
+    @keyframes slide-in {
+        100% { transform: translateX(0%); }
+    }
+    @-webkit-keyframes slide-in {
+        100% { -webkit-transform: translateX(0%); }
+    }
+
+}
+
+/* min-width 641px, medium screens */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) { 
+
+    header {
+        padding: 2rem 0;
+    }
+}
+
+ /* max-width 640px, mobile-only styles */
+ @media only screen and (max-width: 40em) {
+
+     header {
+         padding: 1rem 0;
+     }
+
+     #auth-lnk {
+         font-size: 1.4em;
+     }
+
+     p.subtxt {
+         font-size: .85em;
+     }
+
+ }
+
+ #fixRatio {
+    width: 100%;
+    overflow: hidden
+ }

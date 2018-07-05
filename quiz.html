@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -148,3 +149,34 @@
 </body>
 
 </html>
+
+ <!-- Linking CSS -->
+ <link rel="stylesheet" type="text/css" href="css/reset.css">
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    </script>
+
+
+<header>
+    <div class="row">
+      <div class="columns large-4 small-10 header-left">
+        <a href="index.html" id="auth-lnk">Nasapp</a>
+        <p class="subtxt">Planetary Educational App</p>
+      </div>
+      <div class="columns large-8 small-2 header-left">
+        <img src="images/menu.svg" id="menu" (click)="toggle()">
+        <ul [ngClass]="{show: opened, animMenu: opened}">
+          <li id="exit"><img src="images/close.svg" (click)="toggle()"></li>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
