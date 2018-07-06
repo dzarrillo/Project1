@@ -26,6 +26,8 @@ $(document).ready(function () {
     };
     firebase.initializeApp(config);
 
+    // https://media1.giphy.com/media/vDV9WHgNKReBW/giphy.gif
+
     //Get the data
     var databaseReference = firebase.database().ref("quiz/");
 
@@ -40,10 +42,15 @@ $(document).ready(function () {
         myQuiz.question = question;
         myQuiz.answer = answer;
         arrMyQuiz[count] = myQuiz;
-        // use this to shuffle answer to get random planets
+
         arrPlanets[count] = answer;
         count += 1;
     });
+
+    // var delayQuiz = setTimeout("do nothing", 5000);
+    // var timer = setInterval(function(){
+    //     populateQuiz();
+    // }, 5000);
 
     $("#startmyquiz").on("click", function () {
         // console.log("Start quiz clicked")
@@ -54,37 +61,98 @@ $(document).ready(function () {
         var msg = "";
         event.preventDefault();
 
-        if (correctAnswer == guessedAnswer) {
-            // alert("correct " + correctAnswer + "  Guessed: " + guessedAnswer);
-            totalCorrect += 1;
-            msg = "You rock!";
-        } else {
-            // alert("Wrong  " + correctAnswer + "  Guessed: " + guessedAnswer);
-            totalWrong += 1;
-            msg = "Nice try! The correct answer is " + correctAnswer;
-        }
-
-        $('#navigation ul li').css('display', 'inline-block');
-        modal.css({ display: "block" });
-        message.text(msg);
-
-        if (questionCount < count) {
+        // check to see if radiobutton was selected
+        if ($(".form-check-input").is(":checked")) {
             questionCount += 1;
-            populateQuiz();
+            console.log("Count: " + questionCount);
+            if (correctAnswer == guessedAnswer) {
+                // alert("correct " + correctAnswer + "  Guessed: " + guessedAnswer);
+                totalCorrect += 1;
+                msg = "Correct, You rock!";
+            } else {
+                // alert("Wrong  " + correctAnswer + "  Guessed: " + guessedAnswer);
+                totalWrong += 1;
+                msg = "Nice try! The correct answer is " + correctAnswer;
+            }
+
+            $('#navigation ul li').css('display', 'inline-block');
+            modal.css({ display: "block" });
+            message.text(msg);
+
+            if (questionCount < count) {
+
+                populateQuiz();
+            } else {
+                // alert("Quiz completed show results: correct - " + totalCorrect + " wrong: " + totalWrong);
+                msg = "Quiz completed! "
+                msg += msg + "Correct: " + totalCorrect + " ";
+                msg += msg + "Wrong: " + totalWrong;
+
+                modal.css("display", "block");
+                message.text(msg);
+            }
+            // refresh buttons
+            // $(".form-check-input").prop("checked", false ).checkboxradio("refresh");
+            $(".form-check-input").prop("checked", false);
+
+            if (questionCount == 9) {
+                // Quiz over
+                // alert("Quiz completed show results: correct - " + totalCorrect + " wrong: " + totalWrong);
+                var score = getScore(totalCorrect);
+                
+                msg = "Quiz completed "
+                // msg += "Your score " + score;
+                msg += "Correct: " + totalCorrect + " ";
+                msg += "Wrong: " + totalWrong;
+
+                modal.css("display", "block");
+                message.text(msg);
+            }
+
         } else {
-            // alert("Quiz completed show results: correct - " + totalCorrect + " wrong: " + totalWrong);
-            msg = "Quiz completed \r \n"
-            msg += msg + "Correct: " + totalCorrect + " ";
-            msg += msg + "Wrong: " + totalWrong;
+            msg = "Please select one of the planets before hitting submit!"
 
             modal.css("display", "block");
             message.text(msg);
         }
-        // refresh buttons
-        // $(".form-check-input").prop("checked", false ).checkboxradio("refresh");
-        $(".form-check-input").prop("checked", false);
+
     });
 
+    function getScore(totalCorrect){
+        switch (totalCorrect) {
+            case 9:
+                score = "100%"
+                break;
+            case 8:
+                score = "88%"
+                break;
+            case 7:
+                score = "77%"
+                break;
+            case 6:
+                score = "66%"
+                break;
+            case 5:
+                score = "55%"
+                break;
+            case 4:
+                score = "44%"
+                break;
+            case 3:
+                score = "33%"
+                break;
+            case 2:
+                score = "22%"
+                break;
+            case 1:
+                score = "11%"
+                break;
+            case 0:
+                score = "0%"
+                break;
+        }
+        return score;
+    }
     // When the user clicks on <span> (x), close the modal
     $("span").on("click", function () {
         modal.css("display", "none");
@@ -102,7 +170,7 @@ $(document).ready(function () {
         // alert("checked " + guessedAnswer); 
     })
 
-    
+
     // Populate form
     function populateQuiz() {
 
@@ -112,33 +180,33 @@ $(document).ready(function () {
 
         // shuffle
         arrPlanets = shuffle(arrPlanets);  //arrPlanets[count]
-        for (var z = 0; z < arrPlanets.length; z++) {
-            console.log("arrPlanets " + arrPlanets[z]);
-        }
+        // for (var z = 0; z < arrPlanets.length; z++) {
+        //     console.log("arrPlanets " + arrPlanets[z]);
+        // }
 
         // Clear the array
         arrAnsw = [];
 
         // save room for the correct planet
         for (var j = 0; j < 3; j++) {
-            if (arrPlanets[j].includes(correctAnswer, 0)) {
-                var num = j + 1;
-                arrAnsw[j] = arrPlanets[num];
-            } else {
-                arrAnsw[j] = arrPlanets[j];
-            }
+            arrAnsw[j] = arrPlanets[j];
         }
 
-        arrAnsw.push(correctAnswer);
+        if (arrAnsw.includes(correctAnswer, 0)) {
+            num = arrPlanets.length - 1;
+            arrAnsw.push(arrPlanets[num]);
+        } else {
+            arrAnsw.push(correctAnswer);
+        }
         // shuffle the arrAnsw array - I don't want the answer to be in the same position for each question
         arrAnsw = shuffle(arrAnsw);
 
-        console.log("Coorect answer is " + correctAnswer);
+        // console.log("Coorect answer is " + correctAnswer);
         $("#option1").text(arrAnsw[0]);
         $("#option2").text(arrAnsw[1]);
         $("#option3").text(arrAnsw[2]);
         $("#option4").text(arrAnsw[3]);
-
+        // questionCount += 1;
     }
 
     function shuffle(array) {
@@ -161,4 +229,6 @@ $(document).ready(function () {
 
         return array;
     }
+
+
 });
