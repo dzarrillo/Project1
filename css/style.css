@@ -50,6 +50,12 @@ header ul li img {
     header {
         padding: 4rem 0;
     }
+    #auth-lnk{
+        float:right;
+    }
+    p.subtxt{
+        color:white;
+    }
 }
 
 @media only screen and (max-width: 64.063em) { 
@@ -114,7 +120,7 @@ header ul li img {
 /* min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) and (max-width: 64em) { 
 
-    header {
+    header{
         padding: 2rem 0;
     }
 }
@@ -134,9 +140,4 @@ header ul li img {
          font-size: .85em;
      }
 
- }
-
- #fixRatio {
-    width: 100%;
-    overflow: hidden
  }
