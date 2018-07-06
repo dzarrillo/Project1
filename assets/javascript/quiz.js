@@ -84,12 +84,12 @@ $(document).ready(function () {
                 populateQuiz();
             } else {
                 // alert("Quiz completed show results: correct - " + totalCorrect + " wrong: " + totalWrong);
-                msg = "Quiz completed! "
-                msg += msg + "Correct: " + totalCorrect + " ";
-                msg += msg + "Wrong: " + totalWrong;
+                // msg = "Quiz completed! "
+                // msg += msg + "Correct: " + totalCorrect + " ";
+                // msg += msg + "Wrong: " + totalWrong;
 
-                modal.css("display", "block");
-                message.text(msg);
+                // modal.css("display", "block");
+                // message.text(msg);
             }
             // refresh buttons
             // $(".form-check-input").prop("checked", false ).checkboxradio("refresh");
