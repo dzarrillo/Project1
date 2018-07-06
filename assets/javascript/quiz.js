@@ -95,7 +95,7 @@ $(document).ready(function () {
             // $(".form-check-input").prop("checked", false ).checkboxradio("refresh");
             $(".form-check-input").prop("checked", false);
 
-            if (questionCount == 9) {
+            if (questionCount == 8) {
                 // Quiz over
                 // alert("Quiz completed show results: correct - " + totalCorrect + " wrong: " + totalWrong);
                 var score = getScore(totalCorrect);
